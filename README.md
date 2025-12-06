@@ -1,4 +1,5 @@
-# OurScheme — 以 C++ 實作的 Scheme interpreter(直譯器)
+![OurScheme Banner](docs/OurScheme_Banner.png)
+# OurScheme — 以 C++ 實作的 Scheme interpreter
 A Scheme interpreter implemented in modern C++, featuring lexical analysis, recursive-descent parsing, AST evaluation, lexical scoping, lambda closures, and error-object semantics.
 
 🔹功能特色（Features）
