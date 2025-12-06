@@ -1,7 +1,7 @@
 # OurScheme — 以 C++ 實作的 Scheme interpreter(直譯器)
 A Scheme interpreter implemented in modern C++, featuring lexical analysis, recursive-descent parsing, AST evaluation, lexical scoping, lambda closures, and error-object semantics.
 
-功能特色（Features）
+🔹功能特色（Features）
 語言基本功能
 
   數字（int / float）
@@ -18,7 +18,7 @@ A Scheme interpreter implemented in modern C++, featuring lexical analysis, recu
 
   一般函式呼叫：(+ 1 2)、(f x y) 等
 
-高階語意
+🔹高階語意
 
   lexical scoping（靜態作用域）
 
@@ -32,7 +32,7 @@ A Scheme interpreter implemented in modern C++, featuring lexical analysis, recu
 
   eval（動態求值）
 
-Project 4 進階功能
+🔹Project 4 進階功能
 
   create-error-object
 
@@ -46,7 +46,7 @@ Project 4 進階功能
 
   Verbose 模式（方便除錯與觀察 AST）
 
-系統架構亮點
+🔹系統架構亮點
 
   採用 std::shared_ptr 管理 AST，避免記憶體洩漏或重複釋放
 
@@ -80,7 +80,7 @@ Project 4 進階功能
       |       Result       |
       +--------------------+
 
-求值流程（Evaluation Flow）
+🔹求值流程（Evaluation Flow）
   Lexer
     將輸入字串轉換為 Token（括號、符號、字串、數字、布林、dot 等）。
 
