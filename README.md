@@ -55,30 +55,8 @@ A Scheme interpreter implemented in modern C++, featuring lexical analysis, recu
   具備安全 clone 機制（SafeClone），避免環境錯誤或 AST 破壞
   
   錯誤物件機制確保求值流程穩定性
-      +--------------------+
-      |        REPL        |
-      +--------------------+
-                 |
-                 v
-      +--------------------+
-      |       Lexer        |
-      +--------------------+
-                 |
-                 v
-      +--------------------+
-      |      Parser        |
-      |  (AST Builder)     |
-      +--------------------+
-                 |
-                 v
-      +--------------------+
-      |      Evaluator     |
-      +--------------------+
-                 |
-                 v
-      +--------------------+
-      |       Result       |
-      +--------------------+
+      |        REPL        | -> |       Lexer        | -> |      Parser        | -> |  (AST Builder)     | -> |      Evaluator     | -> |       Result       |
+
 
 🔹求值流程（Evaluation Flow）
   Lexer
