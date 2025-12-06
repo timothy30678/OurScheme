@@ -108,12 +108,12 @@ char gNextChar = '\0' ;    // the char we just read in
 int gNextCharLine = -1 ;   // line-no of gNextChar (the char we just read in)
 int gNextCharColumn = -1 ; // column-no of gNextChar (the char we just read in)
 
-// ---------------------------------------error³B²z start ----------------------------------------------------------
+// ---------------------------------------errorè™•ç† start ----------------------------------------------------------
 
 class ProjectException : public exception {
 	public :
 		virtual const char* what() const noexcept override {
-			return "There is an exception in your project¡I\n" ;
+			return "There is an exception in your projectï¼\n" ;
 		}
 }; // class ProjectException
 
@@ -210,7 +210,7 @@ class MissingRightParenException : public ProjectException {
 class ExitException : public ProjectException {
 	public:
 		const char* what() const noexcept override {
-			return "ExitException¡I" ;
+			return "ExitExceptionï¼" ;
 		}
 	
 };
@@ -484,7 +484,7 @@ class DivisionByZeroException : public ProjectException {
 		}
 		
 }; 
-// ---------------------------------------error³B²z end ----------------------------------------------------------
+// ---------------------------------------errorè™•ç† end ----------------------------------------------------------
 
 
 bool GetNextChar ( char & ch, int & line, int & column ) {
@@ -504,7 +504,7 @@ bool GetNextChar ( char & ch, int & line, int & column ) {
     gLine = gLine + 1 ;
     gColumn = 1 ;
   } // else  
-//  cout << "gNextCharLine¡G " << gNextCharLine << " gNextCharColumn¡G " << gNextCharColumn << " gNextChar¡G " << gNextChar << endl ;
+//  cout << "gNextCharLineï¼š " << gNextCharLine << " gNextCharColumnï¼š " << gNextCharColumn << " gNextCharï¼š " << gNextChar << endl ;
   return true ;
 
 } // GetNextChar()
@@ -552,7 +552,7 @@ bool IsATOMinNode( TokenType type ) {
 	
 } // IsATOMinNode
 
-// ---------------------------------------ÀË¬d¦r¤¸strat--------------------------------------------------- 
+// ---------------------------------------æª¢æŸ¥å­—å…ƒstrat--------------------------------------------------- 
 bool IsWhiteSpace ( char ch ) {
 	
 	if ( ch == ' ' || ch == '\t' || ch == '\n' ) 
@@ -625,7 +625,7 @@ bool SeparatorEncounter ( char ch ) {
 	return false ;
 	
 }
-// ---------------------------------------ÀË¬d¦r¤¸end--------------------------------------------------- 
+// ---------------------------------------æª¢æŸ¥å­—å…ƒend--------------------------------------------------- 
 
 // ---------------------------------------skip start ( EOF Concern !!!)--------------------------------------- 
 bool SkipThisLine() {
@@ -635,11 +635,11 @@ bool SkipThisLine() {
 		
 	while ( gNextChar != '\n' ) { 
 		if( !GetNextChar( gNextChar, gNextCharLine, gNextCharColumn ) ) 
-			return false ; // ³B²zEOF
+			return false ; // è™•ç†EOF
 	} // while 
 	
 	if( !GetNextChar( gNextChar, gNextCharLine, gNextCharColumn ) ) 
-		return false ; // ³B²zEOF
+		return false ; // è™•ç†EOF
 		
 	return true ;
 } // SkipThisLine()
@@ -651,16 +651,16 @@ bool SkipWhiteSpaces() {
 	
 	while ( IsWhiteSpace ( gNextChar ) ) {
 		if( !GetNextChar( gNextChar, gNextCharLine, gNextCharColumn ) ) 
-			return false ; // ³B²zEOF
+			return false ; // è™•ç†EOF
 	} // while
 	
-	return true ; // ¥Nªí¦³¸õ¹LªÅ®æ 
+	return true ; // ä»£è¡¨æœ‰è·³éç©ºæ ¼ 
 } // SkipWhiteSpaces()
 // ---------------------------------------skip end------------------------------------------------------------
 
 
 
-// ---------------------------------------Get ¬ÛÃö³B²z---------------------------------------------------- 
+// ---------------------------------------Get ç›¸é—œè™•ç†---------------------------------------------------- 
 bool GetStringConst( Token & token ) {
 	
 	
@@ -669,12 +669,12 @@ bool GetStringConst( Token & token ) {
 	token.firstcolumn = gNextCharColumn ;
 	token.tokenStr = token.tokenStr + gNextChar ;
 	
-	// ¥Ø«e token.tokenStr = "\"" §R±¼ \" 
+	// ç›®å‰ token.tokenStr = "\"" åˆªæ‰ \" 
 	token.tokenStr = "" ;
 	
 	if( !GetNextChar( gNextChar, gNextCharLine, gNextCharColumn ) ) { 
-		gNextCharColumn = gNextCharColumn + 1 ;// EOF¤]ºâ¤@­Ó¦r¤¸
-		return false ; // ³B²zEOF
+		gNextCharColumn = gNextCharColumn + 1 ;// EOFä¹Ÿç®—ä¸€å€‹å­—å…ƒ
+		return false ; // è™•ç†EOF
 	} 
 
 		
@@ -683,8 +683,8 @@ bool GetStringConst( Token & token ) {
 		if ( gNextChar == '\\' ) {
 			
 			if( !GetNextChar( gNextChar, gNextCharLine, gNextCharColumn ) ) { 
-				gNextCharColumn = gNextCharColumn + 1 ;// EOF¤]ºâ¤@­Ó¦r¤¸
-				return false ; // ³B²zEOF
+				gNextCharColumn = gNextCharColumn + 1 ;// EOFä¹Ÿç®—ä¸€å€‹å­—å…ƒ
+				return false ; // è™•ç†EOF
 			} 
 				
 			if( gNextChar == 'n' )
@@ -702,8 +702,8 @@ bool GetStringConst( Token & token ) {
 			} // else
 			
 			if( !GetNextChar( gNextChar, gNextCharLine, gNextCharColumn ) )  {
-				gNextCharColumn = gNextCharColumn + 1 ; // EOF¤]ºâ¤@­Ó¦r¤¸ 
-				return false ; // ³B²zEOF
+				gNextCharColumn = gNextCharColumn + 1 ; // EOFä¹Ÿç®—ä¸€å€‹å­—å…ƒ 
+				return false ; // è™•ç†EOF
 			}
 				
 				
@@ -711,8 +711,8 @@ bool GetStringConst( Token & token ) {
 		else {
 	        token.tokenStr = token.tokenStr + gNextChar ;
 			if( !GetNextChar( gNextChar, gNextCharLine, gNextCharColumn ) ) {
-				gNextCharColumn = gNextCharColumn + 1 ; // EOF¤]ºâ¤@­Ó¦r¤¸ 
-				return false ; // ³B²zEOF
+				gNextCharColumn = gNextCharColumn + 1 ; // EOFä¹Ÿç®—ä¸€å€‹å­—å…ƒ 
+				return false ; // è™•ç†EOF
 			}
 				
 		} // else
@@ -755,7 +755,7 @@ bool GetTokenStr( Token & token ) {
 	return true ;
 } // GetTokenStr()
 
-// ---------------------------------------©w¸qtoken type start------------------------------------------------
+// ---------------------------------------å®šç¾©token type start------------------------------------------------
 
 bool GetDOT( Token & token ) {
 	
@@ -773,7 +773,7 @@ bool GetINT( Token & token ) {
 	
 	int FirstChar = 0 ;
 	
-	// ÀË¬d¬O§_¬°"+"©Î "-" ³oÃş³æ¤@²Å¸¹¡A³o¨Ç²Å¸¹¤£Äİ©óINTªº½d³ò 
+	// æª¢æŸ¥æ˜¯å¦ç‚º"+"æˆ– "-" é€™é¡å–®ä¸€ç¬¦è™Ÿï¼Œé€™äº›ç¬¦è™Ÿä¸å±¬æ–¼INTçš„ç¯„åœ 
 	if ( token.tokenStr == "+" || token.tokenStr == "-" )
 		return false;
 	
@@ -797,7 +797,7 @@ bool GetINT( Token & token ) {
 		token.Ivalue = stoi( token.tokenStr ) ;
 	} catch (const std::invalid_argument& e) {
 		while(true) {
-			std::cerr << "¿ù»~: ¿é¤Jªº¦r¦êµLªkÂà´«¬°¾ã¼Æ¡I" << std::endl;
+			std::cerr << "éŒ¯èª¤: è¼¸å…¥çš„å­—ä¸²ç„¡æ³•è½‰æ›ç‚ºæ•´æ•¸ï¼" << std::endl;
 		}     	
     }
 	return true ;
@@ -810,7 +810,7 @@ bool GetFLOAT( Token & token ) {
 	bool hasDot = false ;
 	bool hasNum = false ;
 
-	// ÀË¬d¬O§_¬°"+"©Î "-" ©Î "." ³oÃş³æ¤@²Å¸¹¡A³o¨Ç²Å¸¹¤£Äİ©óFLOATªº½d³ò 
+	// æª¢æŸ¥æ˜¯å¦ç‚º"+"æˆ– "-" æˆ– "." é€™é¡å–®ä¸€ç¬¦è™Ÿï¼Œé€™äº›ç¬¦è™Ÿä¸å±¬æ–¼FLOATçš„ç¯„åœ 
 	if ( token.tokenStr == "+" || token.tokenStr == "-" || token.tokenStr == "." )
 		return false;
 	
@@ -842,9 +842,9 @@ bool GetFLOAT( Token & token ) {
  			if (ch == '.') {
  				
                 if ( hasDot == true ) 
-                    return false;  // ¦pªG¤w¸g¦³¤p¼ÆÂI¡A¦A¹J¨ì¤p¼ÆÂIªğ¦^ false
+                    return false;  // å¦‚æœå·²ç¶“æœ‰å°æ•¸é»ï¼Œå†é‡åˆ°å°æ•¸é»è¿”å› false
                     
-                hasDot = true;  // ³]¸m¤w¸g¦³¤p¼ÆÂI
+                hasDot = true;  // è¨­ç½®å·²ç¶“æœ‰å°æ•¸é»
                  
 			} // if	
             
@@ -906,7 +906,7 @@ void DefineTokenType( Token & token ) {
 	return ;
 } // DefineTokenType()
 
-// ---------------------------------------©w¸qtoken type end--------------------------------------------------------------
+// ---------------------------------------å®šç¾©token type end--------------------------------------------------------------
 
 // ---------------------------------------Get Token (Lexer)---------------------------------------------------------------
 
@@ -918,7 +918,7 @@ void ClearToken( Token &token ) {
 }
 
 
-// return true ¥Nªí¤w¨ú§¹Token¡Areturn false ¥Nªí¦b¨úToken®É¹J¨ìEOF(¤]¥NªíToken«á­±ºò±µEOF)¡A«O¯dToken¡A³B²zEOF 
+// return true ä»£è¡¨å·²å–å®ŒTokenï¼Œreturn false ä»£è¡¨åœ¨å–Tokenæ™‚é‡åˆ°EOF(ä¹Ÿä»£è¡¨Tokenå¾Œé¢ç·Šæ¥EOF)ï¼Œä¿ç•™Tokenï¼Œè™•ç†EOF 
 bool GetToken( Token & token ) {
 	
 	ClearToken( token ) ;
@@ -947,7 +947,7 @@ bool GetToken( Token & token ) {
 		
 	} // if
 
-	// ¥ª¬A¸¹ 
+	// å·¦æ‹¬è™Ÿ 
 	if ( IsLEFT_PAREN( gNextChar ) ) {
 		token.tokenStr = token.tokenStr + '(' ;
 		token.type = LEFT_PAREN ;
@@ -956,7 +956,7 @@ bool GetToken( Token & token ) {
 		GetNextChar( gNextChar, gNextCharLine, gNextCharColumn ) ;
 	} // if ()
 	
-	// ¥k¬A¸¹ 
+	// å³æ‹¬è™Ÿ 
 	else if ( IsRIGHT_PAREN( gNextChar ) ) {
 		token.tokenStr = token.tokenStr + ')' ;
 		token.type = RIGHT_PAREN ;	
@@ -965,7 +965,7 @@ bool GetToken( Token & token ) {
 		GetNextChar( gNextChar, gNextCharLine, gNextCharColumn ) ;
 	} // else if()
 	
-	// ¤Ş¸¹
+	// å¼•è™Ÿ
 	else if ( IsQuote( gNextChar ) ) {
 		token.tokenStr = token.tokenStr + '\'' ;
 		token.type = QUOTE ;
@@ -974,7 +974,7 @@ bool GetToken( Token & token ) {
 		GetNextChar( gNextChar, gNextCharLine, gNextCharColumn ) ;
 	} // else if()
 	
-	// Âù¤Ş¸¹ 
+	// é›™å¼•è™Ÿ 
 	else if ( IsDoubleQuote ( gNextChar ) ) {
 		
 		if( !GetStringConst( token ) ) {
@@ -1009,7 +1009,7 @@ bool GetToken( Token & token ) {
 
 //----------------------------------------Parser------------------------------------------------------- 
 
-// ·s¼Wlambda¸`ÂI³B²z ( ­Y¬OÅª¨ú¨ìlambda¸`ÂIª½±µ¿é¥X#<procedure lambda> ¤£¥Î (finish) (debug mode)
+// æ–°å¢lambdaç¯€é»è™•ç† ( è‹¥æ˜¯è®€å–åˆ°lambdaç¯€é»ç›´æ¥è¼¸å‡º#<procedure lambda> ä¸ç”¨ (finish) (debug mode)
 void printAST( const shared_ptr<ASTNode>& node, bool isDisplay, bool isWrite, int depth = 0, bool first = true, bool stay = false ) {
 	
 	if (!node) {
@@ -1043,7 +1043,7 @@ void printAST( const shared_ptr<ASTNode>& node, bool isDisplay, bool isWrite, in
 			}
 		} // if
     } // if
-    else if ( node->type == LAMBDA ) { // debug°O±o³]¬°False // ¦^´_­ìª¬°O±o 
+    else if ( node->type == LAMBDA ) { // debugè¨˜å¾—è¨­ç‚ºFalse // å›å¾©åŸç‹€è¨˜å¾— 
     	
     	shared_ptr<LambdaNode> L = static_pointer_cast<LambdaNode>(node) ;
     	string output = "#<procedure " + L->value + ">" ;
@@ -1069,7 +1069,7 @@ void printAST( const shared_ptr<ASTNode>& node, bool isDisplay, bool isWrite, in
 		if ( first ) 
         	cout << string(depth * 2, ' ') << "( ";
 		
-		// cons¸`ÂIªºleft¤£·|¬Onullptr 
+		// consç¯€é»çš„leftä¸æœƒæ˜¯nullptr 
 		if ( cons->left->type == CONS ) { // left: CONS
 		
 			if(!stay)
@@ -1172,9 +1172,9 @@ void printAST( const shared_ptr<ASTNode>& node, bool isDisplay, bool isWrite, in
 bool IsExit( const shared_ptr<ASTNode>& AST ) {
 	
 	if ( AST ) {
-		if ( AST->type == CONS ) {  // ÀË¬d¬O§_¬° CONS ¸`ÂI
+		if ( AST->type == CONS ) {  // æª¢æŸ¥æ˜¯å¦ç‚º CONS ç¯€é»
 		    shared_ptr<ConsNode> cons = static_pointer_cast<ConsNode>(AST);
-			if ( cons->left && cons->right && cons->left->type == ATOM && cons->right->type == ATOM ) { // ÀË¬d left ¬O§_¬° ATOMNode
+			if ( cons->left && cons->right && cons->left->type == ATOM && cons->right->type == ATOM ) { // æª¢æŸ¥ left æ˜¯å¦ç‚º ATOMNode
 				shared_ptr<ATOMNode> atomL = static_pointer_cast<ATOMNode>(cons->left) ;
 				shared_ptr<ATOMNode> atomR = static_pointer_cast<ATOMNode>(cons->right) ;
 		
@@ -1437,7 +1437,7 @@ class Parser {
     			
     		shared_ptr<ASTNode> result = parseSExp() ;
 
-			// ¦b³o¸Ì­«»s¦æ¦C 	
+			// åœ¨é€™è£¡é‡è£½è¡Œåˆ— 	
     		ResetLineAndColumn() ; 
     		
     		if ( SkipToNext() == false )
@@ -1506,7 +1506,7 @@ class Evaluator {
 			return ( atom->tokentype == NIL || atom->tokentype == T ) ;
 		} // IsBoolean()
 		
-		//nil ¬OªÅ list¡A¤]¥Nªí false¡]¹ïÀ³ #f¡^
+		//nil æ˜¯ç©º listï¼Œä¹Ÿä»£è¡¨ falseï¼ˆå°æ‡‰ #fï¼‰
 		bool IsNIL ( shared_ptr<ATOMNode> atom ) {
 			return atom->tokentype == NIL ;
 		} // IsNIL()
@@ -1515,7 +1515,7 @@ class Evaluator {
 			return ( IsINT(atom) || IsFLOAT(atom) || IsBooleanTrue(atom) || IsNIL(atom) || IsString(atom) ) ;
 		} // IsLiteral()
 		
-		// local variable (¤w§¹¦¨)
+		// local variable (å·²å®Œæˆ)
 		bool IsBoundSymbol( shared_ptr<ATOMNode> atom, map< string, shared_ptr<ASTNode> > & localSymbolTable ) {
 		
 			if ( IsLiteral(atom) ) {
@@ -1534,7 +1534,7 @@ class Evaluator {
 
 		} // IsBoundSymbol
 		
-		bool IsFunctionName( string name ) { // "\'" ¤£¦A¦¹¦ı¦bEvalCons¨ÌÂÂºâfunction
+		bool IsFunctionName( string name ) { // "\'" ä¸å†æ­¤ä½†åœ¨EvalConsä¾èˆŠç®—function
 			return ( name == "quote" || name == "define" || name == "if" || name == "cond" || name == "begin" || IsBuiltIn(name) || name == "clean-environment" || name == "exit" || name == "lambda" ||
 					 name == "let" || name == "verbose" || name == "verbose?" || name == "create-error-object" || name == "error-object?" || name == "read" || name == "write" || name == "display-string" ||
 					 name == "newline" || name == "symbol->string" || name == "number->string" || name == "eval" || name == "set!" )  ;
@@ -1629,9 +1629,9 @@ class Evaluator {
 		} // EvalQuote
 		
 
-		// ­Y¬O function¡Bif¡Bcond¡Band¡Bor ¡÷ ­t³dÂà¦¨±MÄİ¿ù»~°T®§¡]·| throw ·sªº¿ù»~¡^
-		// ­Y¬O define / set! / let ¡÷ ¤£·|Âà¿ù¡A¦ı·|³]©w hasBeenClassified ¬° true¡AÅı¿ù»~«¬§O«O«ù¬° NoReturnValue
-		// ­Y¨ä¥L¥]»qµ²ºc¡]¦p begin¡^±µ¦¬¨ì®É¡A­Y¿ù»~¤w¤ÀÃş ¡÷ ¤£Âà´«¡Aª½±µ throw ¦^ top-level		
+		// è‹¥æ˜¯ functionã€ifã€condã€andã€or â†’ è² è²¬è½‰æˆå°ˆå±¬éŒ¯èª¤è¨Šæ¯ï¼ˆæœƒ throw æ–°çš„éŒ¯èª¤ï¼‰
+		// è‹¥æ˜¯ define / set! / let â†’ ä¸æœƒè½‰éŒ¯ï¼Œä½†æœƒè¨­å®š hasBeenClassified ç‚º trueï¼Œè®“éŒ¯èª¤å‹åˆ¥ä¿æŒç‚º NoReturnValue
+		// è‹¥å…¶ä»–åŒ…è£¹çµæ§‹ï¼ˆå¦‚ beginï¼‰æ¥æ”¶åˆ°æ™‚ï¼Œè‹¥éŒ¯èª¤å·²åˆ†é¡ â†’ ä¸è½‰æ›ï¼Œç›´æ¥ throw å› top-level		
 		// no return error done! 
 	    shared_ptr<ASTNode> EvalDefine(shared_ptr<ASTNode> node, shared_ptr<ASTNode> funcNode, map< string, shared_ptr<ASTNode> > & localSymbolTable) {
 	      
@@ -1654,7 +1654,7 @@ class Evaluator {
 	      	if (IsLiteral(atom) || IsFunctionName(varName))
 	        	throw DefineFormatException();
 	
-	      // handle (define b a)  b »P a «ü¦V¦P¤@¥÷ª«¥ó
+	      // handle (define b a)  b èˆ‡ a æŒ‡å‘åŒä¸€ä»½ç‰©ä»¶
 	      	shared_ptr<ATOMNode> tempAtom = nullptr;
 	      	if (results[1]->type == ATOM)
 	        	tempAtom = static_pointer_cast<ATOMNode>( results[1] );
@@ -1676,7 +1676,7 @@ class Evaluator {
 	      	return nullptr ;
 	    } // EvalDefine
 	    
-	    // > 2 ­Ó°Ñ¼Æ // ÅÜ¼Æ¤£¬Oatom 
+	    // > 2 å€‹åƒæ•¸ // è®Šæ•¸ä¸æ˜¯atom 
 		// syntactic sugar
 	    shared_ptr<ASTNode> EvalDefine2(shared_ptr<ASTNode> node, shared_ptr<ASTNode> funcNode, map< string, shared_ptr<ASTNode> > & localSymbolTable) {
 	    	
@@ -1685,10 +1685,10 @@ class Evaluator {
 	    	shared_ptr<ASTNode> NameAndVariables = CloneNode( cons->left ) ;
 	    	shared_ptr<ASTNode> Functions = CloneNode( cons->right ) ;
 	    	
-	    	// ¨ú¥Xname and variable ªº¦P®É¡AÀË¬d°Ñ¼Æ¶°¦X¤¤ªºs-exp¬O§_¤£¬Onon-list error 
+	    	// å–å‡ºname and variable çš„åŒæ™‚ï¼Œæª¢æŸ¥åƒæ•¸é›†åˆä¸­çš„s-expæ˜¯å¦ä¸æ˜¯non-list error 
 	    	vector<shared_ptr<ASTNode>> results = GetRawParameters( NameAndVariables, "define2", funcNode ) ;
 	    		
-	    	for ( auto n : results ) { // ÀË¬dfunction name ©M variable name ­Y¤£¬Oatom¡A§Y¥á¥X¿ù»~ 
+	    	for ( auto n : results ) { // æª¢æŸ¥function name å’Œ variable name è‹¥ä¸æ˜¯atomï¼Œå³ä¸Ÿå‡ºéŒ¯èª¤ 
 	    		if ( n->type != ATOM )
 	    			throw DefineFormatException() ;
 			} // for
@@ -1696,16 +1696,16 @@ class Evaluator {
 			shared_ptr<ATOMNode> atom = static_pointer_cast<ATOMNode>(results[0]) ;
 		    string funcName = atom->value  ;
 		      	
-			if (IsLiteral(atom) || IsFunctionName(funcName)) // ÀË¬dFunction name ¬O§_¬°«O¯d¦r©ÎµÛ¼Æ­È 
+			if (IsLiteral(atom) || IsFunctionName(funcName)) // æª¢æŸ¥Function name æ˜¯å¦ç‚ºä¿ç•™å­—æˆ–è‘—æ•¸å€¼ 
 		        throw DefineFormatException();
 		        
-		    shared_ptr<ConsNode> cons2 = static_pointer_cast<ConsNode>(NameAndVariables) ; // ¦³¸g¹L GetRawParametersÀËÅç¹L NameAndVariables¬O¤@­Ócons 
+		    shared_ptr<ConsNode> cons2 = static_pointer_cast<ConsNode>(NameAndVariables) ; // æœ‰ç¶“é GetRawParametersæª¢é©—é NameAndVariablesæ˜¯ä¸€å€‹cons 
 		    shared_ptr<ASTNode> Variables = CloneNode( cons2->right ) ; 
 		    
 		    if ( Functions->type == ATOM ) {
 			    shared_ptr<ATOMNode> atomF = static_pointer_cast<ATOMNode>(Functions);
 			    if (IsNIL(atomF)) {
-			        throw DefineFormatException(); // µL body
+			        throw DefineFormatException(); // ç„¡ body
 			    } // if
 			} // if
 			
@@ -1725,7 +1725,7 @@ class Evaluator {
 			vector< shared_ptr<ASTNode> > results = GetRawParameters( node, "if", funcNode ) ;
 			
 			
-			// °Ñ¼Æ¿ù»~ 
+			// åƒæ•¸éŒ¯èª¤ 
 			if ( results.size() != 2 && results.size() != 3 ) {
 				throw WrongNumberOfArgumentException("if") ;
 			} // if
@@ -1741,7 +1741,7 @@ class Evaluator {
 			} // catch
 			bool isFalse = false ;
 				
-			// §PÂ_cond¬O§_¬°false 
+			// åˆ¤æ–·condæ˜¯å¦ç‚ºfalse 
 			if ( cond->type == ATOM ) {
 				shared_ptr<ATOMNode> atom = static_pointer_cast<ATOMNode>(cond);
 					
@@ -1752,7 +1752,7 @@ class Evaluator {
 			} // if
 
 			
-			// ³B²z¨â­Ó°Ñ¼Æªº±¡ªp 
+			// è™•ç†å…©å€‹åƒæ•¸çš„æƒ…æ³ 
 			if ( results.size() == 2 ) {
 				
 				if ( isFalse ) {
@@ -1773,7 +1773,7 @@ class Evaluator {
 					
 			} // if
 			
-			// ³B²z¤T­Ó°Ñ¼Æªº±¡ªp 
+			// è™•ç†ä¸‰å€‹åƒæ•¸çš„æƒ…æ³ 
 			else if ( results.size() == 3 ) {
 				shared_ptr<ASTNode> ans = nullptr ;
 				 
@@ -1796,7 +1796,7 @@ class Evaluator {
 		        throw CondFormatException(funcNode);
 		    }
 			
-			// ¥ıÀË¬d¦U­Ó§PÂ_¦¡ªº®æ¦¡ 
+			// å…ˆæª¢æŸ¥å„å€‹åˆ¤æ–·å¼çš„æ ¼å¼ 
 			for ( int i = 0 ; i < exprs.size() ; i++ ) {
 		        vector< shared_ptr<ASTNode> > elements = GetCondAndPos(exprs[i], funcNode);
 		        
@@ -1813,12 +1813,12 @@ class Evaluator {
 				bool isFalse = false;
 		        bool matched = false;
 		        
-		        // -----------------------------------cond³B²z 
+		        // -----------------------------------condè™•ç† 
 		
 		        if (elements[0]->type == ATOM) {
 		            shared_ptr<ATOMNode> atom = static_pointer_cast<ATOMNode>(elements[0]);
 		
-		            // ¦Xªk else ¤À¤ä¡G¥²¶·¬O³Ì«á¤@­Ó
+		            // åˆæ³• else åˆ†æ”¯ï¼šå¿…é ˆæ˜¯æœ€å¾Œä¸€å€‹
 		            if (atom->value == "else" && i == exprs.size() - 1) {
 			            shared_ptr<ASTNode> result = nullptr;
 			            for (int j = 1; j < elements.size(); j++) {
@@ -1840,7 +1840,7 @@ class Evaluator {
 							} // catch
 			                
 			                if (j == elements.size() - 1)
-			                    result = temp; // «O¯d³Ì«á¤@­Ó
+			                    result = temp; // ä¿ç•™æœ€å¾Œä¸€å€‹
 			            } // for
 			            return result;
 		            }
@@ -1865,10 +1865,10 @@ class Evaluator {
 		            }
 		        }
 		        
-		        // -----------------------------------cond³B²z 
+		        // -----------------------------------condè™•ç† 
 		        
 		        if (!isFalse) {
-		            // °õ¦æ¹ïÀ³ªºªí¹F¦¡­Ì¡A¦^¶Ç³Ì«á¤@­Ó
+		            // åŸ·è¡Œå°æ‡‰çš„è¡¨é”å¼å€‘ï¼Œå›å‚³æœ€å¾Œä¸€å€‹
 		            shared_ptr<ASTNode> result = nullptr;
 		            for (int j = 1; j < elements.size(); j++) {
 		            	
@@ -1891,7 +1891,7 @@ class Evaluator {
 		                
 		                
 		                if (j == elements.size() - 1)
-		                    result = temp; // «O¯d³Ì«á¤@­Ó
+		                    result = temp; // ä¿ç•™æœ€å¾Œä¸€å€‹
 		            } // for
 		            return result;
 		        } // if
@@ -1945,7 +1945,7 @@ class Evaluator {
 				
 			} // for
 			
-			shared_ptr<ASTNode> ans = results.back() ; // «O¯d³Ì«á­nreturnªºresult 
+			shared_ptr<ASTNode> ans = results.back() ; // ä¿ç•™æœ€å¾Œè¦returnçš„result 
 			
 			return ans ;
 			
@@ -2057,7 +2057,7 @@ class Evaluator {
 			    else if ( results[0]->type == LAMBDA ) {
 			    	throw IncorrectArgumentTypeException( CloneNode( results[0] ) , name) ;
 				} // else if
-			    // «O©³³B²z
+			    // ä¿åº•è™•ç†
 			    else { 
 			    	throw runtime_error("Unknown function name in EvalCarCdr 3: " + name);
 				} 
@@ -2411,7 +2411,7 @@ class Evaluator {
 				} // catch
 		
 		        if (result->type != ATOM) {
-		            // CONS or other «D nil or lambda ¡÷ true
+		            // CONS or other é nil or lambda â†’ true
 		            return CloneNode(result);
 		        } else {
 		            shared_ptr<ATOMNode> atom = static_pointer_cast<ATOMNode>(result);
@@ -2421,7 +2421,7 @@ class Evaluator {
 		        }
 		    }
 		
-		    // ¥ş³¡³£¬O nil
+		    // å…¨éƒ¨éƒ½æ˜¯ nil
 		    return make_shared<ATOMNode>("nil", NIL);
 		} // EvalOR()
 		
@@ -2550,7 +2550,7 @@ class Evaluator {
 		        shared_ptr<ATOMNode> atom2 = static_pointer_cast<ATOMNode>(Cvalue2);
 		
 		        if (IsString(atom1) && IsString(atom2)) {
-		            isEqual = (Cvalue1 == Cvalue2);  // «ü¦V¦P¤@­Ó¦r¦ê¸`ÂI¤~¬° true
+		            isEqual = (Cvalue1 == Cvalue2);  // æŒ‡å‘åŒä¸€å€‹å­—ä¸²ç¯€é»æ‰ç‚º true
 		        } // if
 				else if (atom1->value == atom2->value) {
 		            isEqual = true;
@@ -2567,7 +2567,7 @@ class Evaluator {
 		        return make_shared<ATOMNode>("nil", NIL);
 		} // EvalEqv2()
 
-		// local variable (¤w§¹¦¨, no Eval)
+		// local variable (å·²å®Œæˆ, no Eval)
 		bool IsNodeEqual(shared_ptr<ASTNode> node1, shared_ptr<ASTNode> node2) {
 		    if (!node1 || !node2) return false;
 		
@@ -2582,7 +2582,7 @@ class Evaluator {
 		        return IsNodeEqual(cons1->left, cons2->left) && IsNodeEqual(cons1->right, cons2->right);
 		    }
 		    else if (node1->type == LAMBDA && node2->type == LAMBDA) {
-		    	 // §Y¨Ï¨â­Ó lambda µ²ºc¬Û¦P¡A¤]µø¬°¤£¦P¡A¦]¦¹return false 
+		    	 // å³ä½¿å…©å€‹ lambda çµæ§‹ç›¸åŒï¼Œä¹Ÿè¦–ç‚ºä¸åŒï¼Œå› æ­¤return false 
 		    	return false ;
 //		        shared_ptr<ConsNode> lambda1 = static_pointer_cast<ConsNode>(node1);
 //		        shared_ptr<ConsNode> lambda2= static_pointer_cast<ConsNode>(node2);
@@ -2615,12 +2615,12 @@ class Evaluator {
 		        throw LetFormatException(funcNode);
 		    }
 			
-			// ³B²z variable ¥H¤Î value ªº­È( ¥HAST treeªº¤è¦¡¦s¦b variableHead, valueHead ¸Ì­± ) 
+			// è™•ç† variable ä»¥åŠ value çš„å€¼( ä»¥AST treeçš„æ–¹å¼å­˜åœ¨ variableHead, valueHead è£¡é¢ ) 
 			vector<shared_ptr<ASTNode>> Variables ;
 			vector<shared_ptr<ASTNode>> Values ;
 			vector<shared_ptr<ASTNode>> Functions ;
 			GetVariableAndValue( results[0], funcNode, Variables, Values, localSymbolTable ) ;
-			//³B²zlambda¤¤ªºfunctions 
+			//è™•ç†lambdaä¸­çš„functions 
 
 			for ( int i = 1 ; i < results.size() ; i++ ) {
 
@@ -2633,14 +2633,14 @@ class Evaluator {
 		
 		// no return error done! (next)
 		shared_ptr<ASTNode> ProceedLetFunction( vector<shared_ptr<ASTNode>> Variables, vector<shared_ptr<ASTNode>> Values, vector<shared_ptr<ASTNode>> Functions, shared_ptr<ASTNode> funcNode, map< string, shared_ptr<ASTNode> >  localSymbolTable ){
-			//	let ·|«Ø¥ß ¥ş·sªº°Ï°ìÅÜ¼Æªí¡]symbol table¡^
-			//	¨C­Ó let ³£·|½Æ»s¤@¥÷ symbol table¡AµM«á¥[¤W¦Û¤vªºÅÜ¼Æ»P¹ïÀ³­È¡]¹³¬O x, y, a¡^¡C
-			//	¨C¼h let ¤£·|§ï°Ê¥~¼hÅÜ¼Æ¡A¤]¤£·|¼vÅT¥~¼h¡C
+			//	let æœƒå»ºç«‹ å…¨æ–°çš„å€åŸŸè®Šæ•¸è¡¨ï¼ˆsymbol tableï¼‰
+			//	æ¯å€‹ let éƒ½æœƒè¤‡è£½ä¸€ä»½ symbol tableï¼Œç„¶å¾ŒåŠ ä¸Šè‡ªå·±çš„è®Šæ•¸èˆ‡å°æ‡‰å€¼ï¼ˆåƒæ˜¯ x, y, aï¼‰ã€‚
+			//	æ¯å±¤ let ä¸æœƒæ”¹å‹•å¤–å±¤è®Šæ•¸ï¼Œä¹Ÿä¸æœƒå½±éŸ¿å¤–å±¤ã€‚
 			
-			// «Ø¥ß±MÄİ©óletªºlocalSymbolTable( ¥Ñ©ó¦¹ ProceedLetFunction() ¬O¶Ç­È( call by value ) ¬G¤£¼vÅT¨ä¥L localSymbolTable
+			// å»ºç«‹å°ˆå±¬æ–¼letçš„localSymbolTable( ç”±æ–¼æ­¤ ProceedLetFunction() æ˜¯å‚³å€¼( call by value ) æ•…ä¸å½±éŸ¿å…¶ä»– localSymbolTable
 			// Variables.size() == Value.size()
 			for( int i = 0 ; i < Variables.size() ; i++ ) {
-				// Variables ¥ş³£¬OATOM ¦b GetVariableAndValue() ÀË¬d¹L 
+				// Variables å…¨éƒ½æ˜¯ATOM åœ¨ GetVariableAndValue() æª¢æŸ¥é 
 				shared_ptr<ATOMNode> atom = static_pointer_cast<ATOMNode>(Variables[i]) ;
 				localSymbolTable[ atom->value ] = Values[i] ; 
 			} // for 
@@ -2669,15 +2669,15 @@ class Evaluator {
 		} // let
 
 
-// lambda ºâ¬O¤@­Ófunction ­Y¦³ no return value ªº±¡ªp´N¬O¥L­n¿é¥X Error massage 
-// EvalCons ªº funcNode Åª¨ú¨ì lambda node ­n­pºâ lambdaªº­È( ¨Ï¥ÎªÌÀ³µ¹°Ñ¼Æ­È )
+// lambda ç®—æ˜¯ä¸€å€‹function è‹¥æœ‰ no return value çš„æƒ…æ³å°±æ˜¯ä»–è¦è¼¸å‡º Error massage 
+// EvalCons çš„ funcNode è®€å–åˆ° lambda node è¦è¨ˆç®— lambdaçš„å€¼( ä½¿ç”¨è€…æ‡‰çµ¦åƒæ•¸å€¼ )
 		shared_ptr<ASTNode> EvalLambdaCall( shared_ptr<ASTNode> value, shared_ptr<LambdaNode> Lnode, shared_ptr<ASTNode> funcNode, map< string, shared_ptr<ASTNode> > & localSymbolTable ) {
 			
-			map< string, shared_ptr<ASTNode> > newTable ; // ·sªº°Ï°ìÅÜ¼Æ 
+			map< string, shared_ptr<ASTNode> > newTable ; // æ–°çš„å€åŸŸè®Šæ•¸ 
 			
-//         ¥ı§ä¨ì¦³´X­ÓÅÜ¼Æ¤~¯à©w¥X	results.size() ªº±ø¥ó	
-		    vector<shared_ptr<ASTNode>> Variables = GetRawParameters(Lnode->variables, "lambda procedure", funcNode); // lambdaªºvariables¥ş³£¬Oatom §_«h¦b³o¤§«e·|throw error ( EvalLambdaFunc ) 
-			vector<shared_ptr<ASTNode>> Functions = GetRawParameters(Lnode->functions, "lambda procedure", funcNode); // ¦b¦¹«e¨Ã¨S¦³Eval¹L¡A¬GFunction¤º³¡§Y¨Ï¬O¿ùªº¡A¥Ø«eÁÙ¤£·|¥áError 
+//         å…ˆæ‰¾åˆ°æœ‰å¹¾å€‹è®Šæ•¸æ‰èƒ½å®šå‡º	results.size() çš„æ¢ä»¶	
+		    vector<shared_ptr<ASTNode>> Variables = GetRawParameters(Lnode->variables, "lambda procedure", funcNode); // lambdaçš„variableså…¨éƒ½æ˜¯atom å¦å‰‡åœ¨é€™ä¹‹å‰æœƒthrow error ( EvalLambdaFunc ) 
+			vector<shared_ptr<ASTNode>> Functions = GetRawParameters(Lnode->functions, "lambda procedure", funcNode); // åœ¨æ­¤å‰ä¸¦æ²’æœ‰Evaléï¼Œæ•…Functionå…§éƒ¨å³ä½¿æ˜¯éŒ¯çš„ï¼Œç›®å‰é‚„ä¸æœƒä¸ŸError 
 			vector<shared_ptr<ASTNode>> Value = GetRawParameters(value, "lambda precedure", funcNode); // Raw Value
 		    
 			if ( Value.size() != Variables.size() ) {
@@ -2686,9 +2686,9 @@ class Evaluator {
 		    
 		    // Evaluate Value
 		    for ( int i = 0 ; i < Value.size() ; i++ ) {
-		    	// ¸òlambdaÄİ©ó¦P¤@¼h¯Å¡AÀ³¥Î¤W¤@¼hªºlocal variables 
+		    	// è·Ÿlambdaå±¬æ–¼åŒä¸€å±¤ç´šï¼Œæ‡‰ç”¨ä¸Šä¸€å±¤çš„local variables 
 		    	try {
-		    		Value[i] = Eval(Value[i], dontCareBool, ignore, false, localSymbolTable) ; // Value Evaluated ¡I 
+		    		Value[i] = Eval(Value[i], dontCareBool, ignore, false, localSymbolTable) ; // Value Evaluated ï¼ 
 				} catch ( NoReturnValueException& e ) {
 					if ( !e.GetClassified() )
 						throw UnboundParameterException(e.GetNode());
@@ -2698,13 +2698,13 @@ class Evaluator {
 		    	
 			} // for
 		    
-		    // «Ø¥ß·sªº°Ï°ìÅÜ¼Æ 
+		    // å»ºç«‹æ–°çš„å€åŸŸè®Šæ•¸ 
 		    for ( int i = 0 ; i < Variables.size() ; i++ ) {
 		    	shared_ptr<ATOMNode> atom = static_pointer_cast<ATOMNode>( Variables[i] ) ;
 		    	newTable[atom->value] = Value[i] ;
 			} // for
 		    
-		    // ¨Ï¥ÎnewTable call Eval functions
+		    // ä½¿ç”¨newTable call Eval functions
 			shared_ptr<ASTNode> Ans = nullptr ;
 			for ( int i = 0 ; i < Functions.size() ; i++ ) {
 		    	try {
@@ -2731,7 +2731,7 @@ class Evaluator {
 			return Ans ;
 		} // EvalLambdaCall
 
-// lambda ²Õ¦¨ function <precedure lambda> 
+// lambda çµ„æˆ function <precedure lambda> 
 		shared_ptr<ASTNode> EvalLambdaFunc( shared_ptr<ASTNode> node, shared_ptr<ASTNode> funcNode ) {
 		    vector<shared_ptr<ASTNode>> results = GetRawParameters(node, "lambda", funcNode);
 			
@@ -3018,7 +3018,7 @@ class Evaluator {
 			
 	    } // Evaluate()
 	    
-	    shared_ptr<ASTNode> EvalSet( shared_ptr<ASTNode> node, shared_ptr<ASTNode> funcNode, map< string, shared_ptr<ASTNode> > & localSymbolTable ) { // ( ¼g¨ì³o ) ( ¨ú¤W¤@ª©define ) 
+	    shared_ptr<ASTNode> EvalSet( shared_ptr<ASTNode> node, shared_ptr<ASTNode> funcNode, map< string, shared_ptr<ASTNode> > & localSymbolTable ) { // ( å¯«åˆ°é€™ ) ( å–ä¸Šä¸€ç‰ˆdefine ) 
 	    
 		  vector<shared_ptr<ASTNode>> results = GetRawParameters( node, "set!", funcNode );
 	
@@ -3037,7 +3037,7 @@ class Evaluator {
 	      if (IsLiteral(atom) || IsFunctionName(varName))
 	        throw SetFormatException();
 	
-	      // handle (define b a) ¡÷ b »P a «ü¦V¦P¤@¥÷ª«¥ó
+	      // handle (define b a) â†’ b èˆ‡ a æŒ‡å‘åŒä¸€ä»½ç‰©ä»¶
 	      shared_ptr<ATOMNode> tempAtom = nullptr;
 	      if (results[1]->type == ATOM)
 	        tempAtom = static_pointer_cast<ATOMNode>( results[1] );
@@ -3058,7 +3058,7 @@ class Evaluator {
 	      return CloneNode(value);
 		} // EvalSet
 		
-		// local variable (¤w§¹¦¨, no Eval)
+		// local variable (å·²å®Œæˆ, no Eval)
 		void EvalExit(shared_ptr<ASTNode> node, shared_ptr<ASTNode> funcNode) {
 		    vector<shared_ptr<ASTNode>> parameters = GetRawParameters(node, "exit", funcNode);
 		
@@ -3110,7 +3110,7 @@ class Evaluator {
 			vector<shared_ptr<ASTNode>> results = GetRawParameters(node, "let", funcNode);
 			
 			
-			// ¨S¦³ÅÜ¼Æªº±¡ªp Variables.size() == 0 and Values.size() == 0
+			// æ²’æœ‰è®Šæ•¸çš„æƒ…æ³ Variables.size() == 0 and Values.size() == 0
 			if (results.size() == 0) return;
 	        	
 	        for( int i = 0 ; i < results.size() ; i ++ ) {
@@ -3161,7 +3161,7 @@ class Evaluator {
 			
 		    while ( node->type == CONS ) {
 		        shared_ptr<ConsNode> cons = static_pointer_cast<ConsNode>(node);
-		        results.push_back( CloneNode(cons->left) );  // ¤£°µ Eval¡I
+		        results.push_back( CloneNode(cons->left) );  // ä¸åš Evalï¼
 		        node = cons->right;
 		    } // while
 		    
@@ -3199,7 +3199,7 @@ class Evaluator {
 		    
 		    while ( node->type == CONS ) {
 		        shared_ptr<ConsNode> cons = static_pointer_cast<ConsNode>(node);
-		        results.push_back( CloneNode(cons->left) );  // ¤£°µ Eval¡I
+		        results.push_back( CloneNode(cons->left) );  // ä¸åš Evalï¼
 		        node = cons->right;
 		    } // while
 		    
@@ -3245,7 +3245,7 @@ class Evaluator {
 		
 		    while ( node->type == CONS ) {
 		        shared_ptr<ConsNode> cons = static_pointer_cast<ConsNode>(node);
-		        results.push_back( CloneNode(cons->left) );  // ¤£°µ Eval¡I
+		        results.push_back( CloneNode(cons->left) );  // ä¸åš Evalï¼
 		        node = cons->right;
 		    } // while
 		
@@ -3256,8 +3256,8 @@ class Evaluator {
 				} //if
 			} // if 
 			
-			// ¥H¨¾¸U¤@( ¦b«Ø¾ğ®É¤£·|¦³lambdaªº¥X²{¡A¬G¥¿±`±¡ªp¤Ulambda¤£·|¥X²{¦b¾ğª¬µ²ºc¤¤ Ex: ¤£·|¦³cons->right->type == LAMBDAªº°İÃD )
-			// ( ¦Ó³Ì¥kÃäªº¸`ÂI¤S·|³Q DetectRest() ¾×¤U¨Ó ) 
+			// ä»¥é˜²è¬ä¸€( åœ¨å»ºæ¨¹æ™‚ä¸æœƒæœ‰lambdaçš„å‡ºç¾ï¼Œæ•…æ­£å¸¸æƒ…æ³ä¸‹lambdaä¸æœƒå‡ºç¾åœ¨æ¨¹ç‹€çµæ§‹ä¸­ Ex: ä¸æœƒæœ‰cons->right->type == LAMBDAçš„å•é¡Œ )
+			// ( è€Œæœ€å³é‚Šçš„ç¯€é»åˆæœƒè¢« DetectRest() æ“‹ä¸‹ä¾† ) 
 			else if ( node->type == LAMBDA ) {
 				throw NonListException(funcNode) ;
 			} // else if
@@ -3296,7 +3296,7 @@ class Evaluator {
 		
 		    while ( node->type == CONS ) {
 		        shared_ptr<ConsNode> cons = static_pointer_cast<ConsNode>(node);
-		        results.push_back( CloneNode(cons->left) );  // ¤£°µ Eval¡I
+		        results.push_back( CloneNode(cons->left) );  // ä¸åš Evalï¼
 		        node = cons->right;
 		    }
 			
@@ -3553,7 +3553,7 @@ class Evaluator {
 				return lambda ;	
 			} // if
 			else {
-				throw runtime_error("ERROR IN EvalLambda¡I") ;
+				throw runtime_error("ERROR IN EvalLambdaï¼") ;
 			}
 		} // EvalEvalLambda
 		
@@ -3561,7 +3561,7 @@ class Evaluator {
 		shared_ptr<ASTNode> Eval( shared_ptr<ASTNode> node, bool & isDefine, bool & isVerbose, bool isTopLevel, map< string, shared_ptr<ASTNode> > & localSymbolTable ) {
 			
 			if( !node )
-				throw runtime_error("nullptr in Eval¡I") ;
+				throw runtime_error("nullptr in Evalï¼") ;
 			
 			if( node->type == ATOM ) {
 				return EvalAtom( node, localSymbolTable ) ;
@@ -3587,12 +3587,12 @@ class Evaluator {
 
 int main() {
 	char c ;
-	cin >> gTestNum; // Åª¨úgTestNum 
-	cin.get(c) ; // Åª¨úgTestNum «á­±ªº\n
+	cin >> gTestNum; // è®€å–gTestNum 
+	cin.get(c) ; // è®€å–gTestNum å¾Œé¢çš„\n
 	
 	cout << "Welcome to OurScheme!\n" ;
 	
-	// Åª¨ú²Ä¤@­Ó¦r¤¸ 
+	// è®€å–ç¬¬ä¸€å€‹å­—å…ƒ 
 	if (!GetNextChar( gNextChar, gNextCharLine, gNextCharColumn )) {
 		cout << "ERROR (no more input) : END-OF-FILE encountered\n" ;
 		cout << "Thanks for using OurScheme!" ;
@@ -3615,7 +3615,7 @@ int main() {
 		    AST = g_parser.parse();
 		    cout << "\n> " ;
 			if ( IsExit( AST ) ) {
-				break;  // ¥¿½T°h¥X°j°é
+				break;  // æ­£ç¢ºé€€å‡ºè¿´åœˆ
 			} // IsExit()
 
 		} // try
@@ -3651,7 +3651,7 @@ int main() {
 			break ;
 		} 
 	
-		// ²Ä¤@¦¸ªº®æ¦¡³B²z 
+		// ç¬¬ä¸€æ¬¡çš„æ ¼å¼è™•ç† 
 		if (first) 
 			first = false ;
 		
@@ -3667,7 +3667,7 @@ int main() {
 			map<string, shared_ptr<ASTNode>> LST; // LocalSymbolTable
 			
 			if ( !stop )
-				result = evaluator.Eval(AST,isDefine,isVerboseFunc,true,LST) ; // ¶Ç¤JAST tree¥H¤ÎªÅªºlocal map
+				result = evaluator.Eval(AST,isDefine,isVerboseFunc,true,LST) ; // å‚³å…¥AST treeä»¥åŠç©ºçš„local map
 			else {
 				if ( NoMoreInputAST ){
 					evaluator.Eval(NoMoreInputAST,isDefine,isVerboseFunc,true,LST) ;
@@ -3761,4 +3761,4 @@ int main() {
 //  set!                 ( need to do )
 //  verbose?             ( done ) 
 //  verbose              ( done )
-// deal with ; "go for it ( ¦³°İÃD! )
+// deal with ; "go for it ( æœ‰å•é¡Œ! )
